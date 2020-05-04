@@ -9,7 +9,14 @@ app.get("/", (req, res) => {
 
   https.get(url, (response) => {
     console.log(response.statusCode);
+
+    response.on("data", (data) => {
+      const weatherData = JSON.parse(data);
+      console.log(weatherData);
+    });
   });
+
+  res.send("Server up and running");
 });
 
 app.listen(3000, () => {
